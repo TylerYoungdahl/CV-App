@@ -1,5 +1,5 @@
-import { MainForm } from "./modules/MainForm";
-import Resume from "./modules/Resume";
+import MainForm from "./modules/form/MainForm";
+import Resume from "./modules/resume/Resume";
 import "./App.css";
 
 function App() {
