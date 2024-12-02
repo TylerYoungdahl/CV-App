@@ -1,8 +1,17 @@
-export default function Education() {
+export default function Education({
+  id,
+  school,
+  schoolDegree,
+  schoolStart,
+  schoolEnd,
+}) {
   return (
-    <div className="resume-education">
-      <h2 className="school">University of Plumbing</h2>
-      <p className="school-years">1977-1980</p>
+    <div className="resume-education" data-id={id}>
+      <h2 className="school">{school}</h2>
+      <h3 className="school-degree">{schoolDegree}</h3>
+      <p className="school-years">
+        {schoolStart}-{schoolEnd}
+      </p>
     </div>
   );
 }

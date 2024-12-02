@@ -9,6 +9,7 @@ export default function Resume({
     phone: "",
     email: "",
   },
+  education,
 }) {
   return (
     <div className="resume">
@@ -20,7 +21,17 @@ export default function Resume({
           {generalData.phone} | {generalData.email}
         </div>
       </div>
-      <Education />
+      {education.map((entry) => {
+        return (
+          <Education
+            key={entry.id}
+            school={entry.school}
+            schoolDegree={entry.schoolDegree}
+            schoolStart={entry.schoolStart}
+            schoolEnd={entry.schoolEnd}
+          />
+        );
+      })}
       <Experience />
     </div>
   );

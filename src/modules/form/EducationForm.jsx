@@ -1,28 +1,56 @@
+import Button from "./Button";
 import "./EducationForm.css";
 
-export default function EducationForm() {
+export default function EducationForm({
+  educationData = {
+    id,
+    school,
+    schoolDegree,
+    schoolStart,
+    schoolEnd,
+  },
+  changeEducation,
+  addEducation,
+}) {
   return (
-    <form className="education-form">
+    <form className="education-form" key={educationData.id}>
       <label htmlFor="form-school">School:</label>
-      <input type="text" id="form-school" name="input-school" />
+      <input
+        type="text"
+        name="school"
+        id="form-school"
+        value={educationData.school}
+        onChange={changeEducation}
+      />
       <label htmlFor="input-school-degree">Degree:</label>
-      <input type="text" id="input-school-degree" />
+      <input
+        type="text"
+        name="schoolDegree"
+        id="input-school-degree"
+        value={educationData.schoolDegree}
+        onChange={changeEducation}
+      />
       <label htmlFor="input-school-start">Start Year:</label>
       <input
         type="number"
-        name="input-school-start"
+        name="schoolStart"
         id="input-school-start"
-        min={1900}
+        value={educationData.schoolStart}
+        onChange={changeEducation}
+        min={0}
         max={2025}
       />
       <label htmlFor="input-school-end">End Year:</label>
       <input
         type="number"
-        name="input-school-end"
+        name="schoolEnd"
         id="input-school-end"
-        min={1900}
+        value={educationData.schoolEnd}
+        onChange={changeEducation}
+        min={0}
         max={2025}
       />
+      <Button buttonText={"Add Education"} handleClick={addEducation} />
     </form>
   );
 }

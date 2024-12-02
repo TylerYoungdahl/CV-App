@@ -3,3 +3,13 @@
   padding: 1em 1em 1em 1em;
   color: white;
 }
+
+.general-form,
+.education-form {
+  margin-bottom: 1em;
+}
+
+.education-form-container {
+  display: flex;
+  flex-direction: column;
+}
