@@ -1,9 +1,11 @@
-export default function Experience() {
+export default function Experience({ id, job, company, jobStart, jobEnd }) {
   return (
-    <div className="experience">
-      <h2 className="position">Plumber</h2>
-      <p className="company">Super Mario Brothers</p>
-      <p className="years-active">1981-2024</p>
+    <div className="experience" data-id={id}>
+      <h2 className="position">{job}</h2>
+      <p className="company">{company}</p>
+      <p className="years-active">
+        {jobStart}-{jobEnd}
+      </p>
     </div>
   );
 }

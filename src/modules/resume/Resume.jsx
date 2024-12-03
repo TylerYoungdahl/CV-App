@@ -10,6 +10,7 @@ export default function Resume({
     email: "",
   },
   education,
+  experience,
 }) {
   return (
     <div className="resume">
@@ -32,7 +33,17 @@ export default function Resume({
           />
         );
       })}
-      <Experience />
+      {experience.map((entry) => {
+        return (
+          <Experience
+            key={entry.id}
+            job={entry.job}
+            company={entry.company}
+            jobStart={entry.jobStart}
+            jobEnd={entry.jobEnd}
+          />
+        );
+      })}
     </div>
   );
 }

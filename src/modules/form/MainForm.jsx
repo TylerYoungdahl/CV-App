@@ -1,7 +1,6 @@
 import EducationForm from "./EducationForm";
 import GeneralForm from "./GeneralForm";
 import ExperienceForm from "./ExperienceForm";
-import Button from "./Button";
 import "./MainForm.css";
 
 export default function MainForm({
@@ -10,6 +9,9 @@ export default function MainForm({
   educationData,
   changeEducation,
   addEducation,
+  experienceData,
+  changeExperience,
+  addExperience,
 }) {
   return (
     <div className="main-form">
@@ -19,7 +21,11 @@ export default function MainForm({
         addEducation={addEducation}
         changeEducation={changeEducation}
       />
-      <ExperienceForm />
+      <ExperienceForm
+        experienceData={experienceData}
+        changeExperience={changeExperience}
+        addExperience={addExperience}
+      />
     </div>
   );
 }
