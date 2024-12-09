@@ -5,3 +5,13 @@
   aspect-ratio: 8.5/11;
   background-color: white;
 }
+
+.education {
+  cursor: pointer;
+}
+
+.education:hover,
+.active,
+.experience:hover {
+  background-color: rgb(225, 225, 225);
+}

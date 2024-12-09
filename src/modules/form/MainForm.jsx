@@ -9,6 +9,8 @@ export default function MainForm({
   educationData,
   changeEducation,
   addEducation,
+  educationIsEdit,
+  updateEducation,
   experienceData,
   changeExperience,
   addExperience,
@@ -20,6 +22,8 @@ export default function MainForm({
         educationData={educationData}
         addEducation={addEducation}
         changeEducation={changeEducation}
+        educationIsEdit={educationIsEdit}
+        updateEducation={updateEducation}
       />
       <ExperienceForm
         experienceData={experienceData}

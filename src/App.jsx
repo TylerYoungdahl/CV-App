@@ -5,12 +5,16 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
+  ///////////////////////////// STATE //////////////////////////////////
+
+  // GENERAL
   const [generalData, setGeneralData] = useState({
     firstName: "",
     lastName: "",
     phone: "",
     email: "",
   });
+  // EDUCATION
   const [education, setEducation] = useState([]);
   const [educationData, setEducationData] = useState({
     id: crypto.randomUUID(),
@@ -18,7 +22,10 @@ function App() {
     schoolDegree: "",
     schoolStart: 0,
     schoolEnd: 0,
+    educationIsActive: false,
   });
+  const [educationIsEdit, setEducationIsEdit] = useState(false);
+  // EXPERIENCE
   const [experienceData, setExperienceData] = useState({
     id: crypto.randomUUID(),
     job: "",
@@ -28,13 +35,15 @@ function App() {
   });
   const [experience, setExperience] = useState([]);
 
-  ///////////////////////////////////////////////////
+  ////////////////////// FUNCTIONS /////////////////////////////
 
+  // GENERAL
   const handleChangeGeneral = (e) => {
     const { name, value } = e.target;
     setGeneralData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  // EDUCATION
   const handleChangeEducation = (e) => {
     const { name, value } = e.target;
     setEducationData((prevData) => ({ ...prevData, [name]: value }));
@@ -48,9 +57,37 @@ function App() {
       schoolDegree: "",
       schoolStart: 0,
       schoolEnd: 0,
+      educationIsActive: false,
     });
   };
 
+  const handleEditEducation = (id) => {
+    setEducation((prevData) =>
+      prevData.map((entry) =>
+        entry.id === id
+          ? { ...entry, educationIsActive: true }
+          : { ...entry, educationIsActive: false }
+      )
+    );
+
+    const entry = education.find((entry) => entry.id === id);
+
+    setEducationIsEdit(!educationIsEdit);
+    setEducationData(entry);
+  };
+
+  const handleUpdateEducation = () => {
+    setEducation((prevData) =>
+      prevData.map((entry) =>
+        entry.id === educationData.id
+          ? { ...entry, ...educationData, educationIsActive: false }
+          : entry
+      )
+    );
+    setEducationIsEdit(!educationIsEdit);
+  };
+
+  // EXPERIENCE
   const handleChangeExperience = (e) => {
     const { name, value } = e.target;
     setExperienceData((prevData) => ({ ...prevData, [name]: value }));
@@ -67,24 +104,20 @@ function App() {
     });
   };
 
-  const testFunction = () => {
-    // education.forEach((entry) => {
-    //   console.log(entry.id);
-    // });
-    console.log(experience);
+  const testFn = () => {
+    console.log(education);
   };
-  ///////////////////////////////////////////////////////
+  ////////////////////////// JSX /////////////////////////////
   return (
     <div className="main">
-      <button type="button" onClick={testFunction}>
-        test button
-      </button>
       <MainForm
         generalData={generalData}
         changeGeneral={handleChangeGeneral}
         educationData={educationData}
         changeEducation={handleChangeEducation}
         addEducation={handleAddEducation}
+        educationIsEdit={educationIsEdit}
+        updateEducation={handleUpdateEducation}
         experienceData={experienceData}
         changeExperience={handleChangeExperience}
         addExperience={handleAddExperience}
@@ -92,8 +125,10 @@ function App() {
       <Resume
         generalData={generalData}
         education={education}
+        editEducation={handleEditEducation}
         experience={experience}
       />
+      <button onClick={testFn}>test button</button>
     </div>
   );
 }

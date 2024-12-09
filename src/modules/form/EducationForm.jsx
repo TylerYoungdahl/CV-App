@@ -11,6 +11,8 @@ export default function EducationForm({
   },
   changeEducation,
   addEducation,
+  educationIsEdit,
+  updateEducation,
 }) {
   return (
     <form className="education-form" key={educationData.id}>
@@ -50,7 +52,10 @@ export default function EducationForm({
         min={0}
         max={2025}
       />
-      <Button buttonText={"Add Education"} handleClick={addEducation} />
+      <Button
+        buttonText={educationIsEdit ? "Update Education" : "Add Education"}
+        handleClick={educationIsEdit ? updateEducation : addEducation}
+      />
     </form>
   );
 }

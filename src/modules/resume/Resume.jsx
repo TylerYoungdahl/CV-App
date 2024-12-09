@@ -9,8 +9,9 @@ export default function Resume({
     phone: "",
     email: "",
   },
-  education,
-  experience,
+  education = [],
+  editEducation,
+  experience = [],
 }) {
   return (
     <div className="resume">
@@ -26,10 +27,13 @@ export default function Resume({
         return (
           <Education
             key={entry.id}
+            id={entry.id}
             school={entry.school}
             schoolDegree={entry.schoolDegree}
             schoolStart={entry.schoolStart}
             schoolEnd={entry.schoolEnd}
+            editEducation={editEducation}
+            educationIsActive={entry.educationIsActive}
           />
         );
       })}
