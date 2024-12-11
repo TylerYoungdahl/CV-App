@@ -8,6 +8,7 @@ export default function EducationForm({
   addEducation,
   educationIsEdit,
   updateEducation,
+  deleteEducation,
 }) {
   return (
     <form className="education-form" key={educationData.id}>
@@ -51,6 +52,9 @@ export default function EducationForm({
         buttonText={educationIsEdit ? "Update Education" : "Add Education"}
         handleClick={educationIsEdit ? updateEducation : addEducation}
       />
+      {educationIsEdit ? (
+        <Button buttonText={"Delete"} handleClick={deleteEducation} />
+      ) : null}
     </form>
   );
 }

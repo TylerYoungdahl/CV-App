@@ -8,6 +8,7 @@ export default function ExperienceForm({
   addExperience,
   experienceIsEdit,
   updateExperience,
+  deleteExperience,
 }) {
   return (
     <form className="experience-form" key={experienceData.id}>
@@ -47,6 +48,9 @@ export default function ExperienceForm({
         buttonText={experienceIsEdit ? "Update Experience" : "Add Experience"}
         handleClick={experienceIsEdit ? updateExperience : addExperience}
       />
+      {experienceIsEdit ? (
+        <Button buttonText={"Delete"} handleClick={deleteExperience} />
+      ) : null}
     </form>
   );
 }

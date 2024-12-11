@@ -73,7 +73,15 @@ function App() {
           : entry
       )
     );
-    setEducationIsEdit();
+    setEducationIsEdit(false);
+  };
+
+  const handleDeleteEducation = () => {
+    setEducation((prevData) =>
+      prevData.filter((entry) => entry.id !== educationData.id)
+    );
+    setEducationData({ ...defaultEducationData, id: crypto.randomUUID() });
+    setEducationIsEdit(false);
   };
 
   // EXPERIENCE
@@ -122,13 +130,21 @@ function App() {
           : entry
       )
     );
-    setExperienceIsEdit();
+    setExperienceIsEdit(false);
+  };
+
+  const handleDeleteExperience = () => {
+    setExperience((prevData) =>
+      prevData.filter((entry) => entry.id !== experienceData.id)
+    );
+    setExperienceData({ ...defaultExperienceData, id: crypto.randomUUID() });
+    setExperienceIsEdit(false);
   };
 
   const testFn = () => {
-    console.log(experience);
-    console.log(experienceIsEdit);
-    console.log(experienceData);
+    console.log(education);
+    console.log(educationIsEdit);
+    console.log(educationData);
   };
   ////////////////////////// JSX /////////////////////////////
   return (
@@ -141,11 +157,13 @@ function App() {
         addEducation={handleAddEducation}
         educationIsEdit={educationIsEdit}
         updateEducation={handleUpdateEducation}
+        deleteEducation={handleDeleteEducation}
         experienceData={experienceData}
         changeExperience={handleChangeExperience}
         addExperience={handleAddExperience}
         experienceIsEdit={experienceIsEdit}
         updateExperience={handleUpdateExperience}
+        deleteExperience={handleDeleteExperience}
       />
       <Resume
         generalData={generalData}
