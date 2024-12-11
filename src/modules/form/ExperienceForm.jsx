@@ -1,10 +1,13 @@
 import Button from "./Button";
+import { defaultExperienceData } from "../../defaultValues";
 import "./ExperienceForm.css";
 
 export default function ExperienceForm({
-  experienceData = { id, job, company, jobStart, jobEnd },
+  experienceData = { defaultExperienceData },
   changeExperience,
   addExperience,
+  experienceIsEdit,
+  updateExperience,
 }) {
   return (
     <form className="experience-form" key={experienceData.id}>
@@ -40,7 +43,10 @@ export default function ExperienceForm({
         value={experienceData.jobEnd}
         onChange={changeExperience}
       />
-      <Button buttonText={"Add Experience"} handleClick={addExperience} />
+      <Button
+        buttonText={experienceIsEdit ? "Update Experience" : "Add Experience"}
+        handleClick={experienceIsEdit ? updateExperience : addExperience}
+      />
     </form>
   );
 }

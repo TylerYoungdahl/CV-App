@@ -12,6 +12,7 @@ export default function Resume({
   education = [],
   editEducation,
   experience = [],
+  editExperience,
 }) {
   return (
     <div className="resume">
@@ -41,10 +42,13 @@ export default function Resume({
         return (
           <Experience
             key={entry.id}
+            id={entry.id}
             job={entry.job}
             company={entry.company}
             jobStart={entry.jobStart}
             jobEnd={entry.jobEnd}
+            editExperience={editExperience}
+            experienceIsActive={entry.experienceIsActive}
           />
         );
       })}

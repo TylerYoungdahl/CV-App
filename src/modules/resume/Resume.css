@@ -6,7 +6,8 @@
   background-color: white;
 }
 
-.education {
+.education,
+.experience {
   cursor: pointer;
 }
 

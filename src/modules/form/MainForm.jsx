@@ -14,6 +14,8 @@ export default function MainForm({
   experienceData,
   changeExperience,
   addExperience,
+  experienceIsEdit,
+  updateExperience,
 }) {
   return (
     <div className="main-form">
@@ -29,6 +31,8 @@ export default function MainForm({
         experienceData={experienceData}
         changeExperience={changeExperience}
         addExperience={addExperience}
+        experienceIsEdit={experienceIsEdit}
+        updateExperience={updateExperience}
       />
     </div>
   );

@@ -1,8 +1,9 @@
+import { useState } from "react";
+import { defaultEducationData, defaultExperienceData } from "./defaultValues";
 import MainForm from "./modules/form/MainForm";
 import Resume from "./modules/resume/Resume";
 import Education from "./modules/resume/Education";
 import "./App.css";
-import { useState } from "react";
 
 function App() {
   ///////////////////////////// STATE //////////////////////////////////
@@ -16,24 +17,12 @@ function App() {
   });
   // EDUCATION
   const [education, setEducation] = useState([]);
-  const [educationData, setEducationData] = useState({
-    id: crypto.randomUUID(),
-    school: "",
-    schoolDegree: "",
-    schoolStart: 0,
-    schoolEnd: 0,
-    educationIsActive: false,
-  });
+  const [educationData, setEducationData] = useState(defaultEducationData);
   const [educationIsEdit, setEducationIsEdit] = useState(false);
   // EXPERIENCE
-  const [experienceData, setExperienceData] = useState({
-    id: crypto.randomUUID(),
-    job: "",
-    company: "",
-    jobStart: new Date().toISOString().split("T")[0],
-    jobEnd: new Date().toISOString().split("T")[0],
-  });
   const [experience, setExperience] = useState([]);
+  const [experienceData, setExperienceData] = useState(defaultExperienceData);
+  const [experienceIsEdit, setExperienceIsEdit] = useState(false);
 
   ////////////////////// FUNCTIONS /////////////////////////////
 
@@ -51,29 +40,29 @@ function App() {
 
   const handleAddEducation = () => {
     setEducation([...education, educationData]);
-    setEducationData({
-      id: crypto.randomUUID(),
-      school: "",
-      schoolDegree: "",
-      schoolStart: 0,
-      schoolEnd: 0,
-      educationIsActive: false,
-    });
+    setEducationData({ ...defaultEducationData, id: crypto.randomUUID() });
   };
 
   const handleEditEducation = (id) => {
-    setEducation((prevData) =>
-      prevData.map((entry) =>
-        entry.id === id
-          ? { ...entry, educationIsActive: true }
-          : { ...entry, educationIsActive: false }
-      )
-    );
-
     const entry = education.find((entry) => entry.id === id);
 
-    setEducationIsEdit(!educationIsEdit);
-    setEducationData(entry);
+    if (educationIsEdit && entry.educationIsActive) {
+      setEducation((prevData) =>
+        prevData.map((entry) => ({ ...entry, educationIsActive: false }))
+      );
+      setEducationIsEdit(false);
+      setEducationData({ ...defaultEducationData, id: crypto.randomUUID() });
+    } else {
+      setEducation((prevData) =>
+        prevData.map((entry) =>
+          entry.id === id
+            ? { ...entry, educationIsActive: true }
+            : { ...entry, educationIsActive: false }
+        )
+      );
+      setEducationIsEdit(true);
+      setEducationData(entry);
+    }
   };
 
   const handleUpdateEducation = () => {
@@ -84,7 +73,7 @@ function App() {
           : entry
       )
     );
-    setEducationIsEdit(!educationIsEdit);
+    setEducationIsEdit();
   };
 
   // EXPERIENCE
@@ -95,17 +84,51 @@ function App() {
 
   const handleAddExperience = () => {
     setExperience([...experience, experienceData]);
-    setExperienceData({
-      id: crypto.randomUUID(),
-      job: "",
-      company: "",
-      jobStart: new Date().toISOString().split("T")[0],
-      jobEnd: new Date().toISOString().split("T")[0],
-    });
+    setExperienceData({ ...defaultExperienceData, id: crypto.randomUUID() });
+  };
+
+  const handleEditExperience = (id) => {
+    const entry = experience.find((entry) => entry.id === id);
+
+    if (!entry) {
+      console.error(`No experience entry found with id: ${id}`);
+      return;
+    }
+
+    if (experienceIsEdit && entry.experienceIsActive) {
+      setExperience((prevData) =>
+        prevData.map((entry) => ({ ...entry, experienceIsActive: false }))
+      );
+      setExperienceIsEdit(false);
+      setExperienceData({ ...defaultExperienceData, id: crypto.randomUUID() });
+    } else {
+      setExperience((prevData) =>
+        prevData.map((entry) =>
+          entry.id === id
+            ? { ...entry, experienceIsActive: true }
+            : { ...entry, experienceIsActive: false }
+        )
+      );
+      setExperienceIsEdit(true);
+      setExperienceData(entry);
+    }
+  };
+
+  const handleUpdateExperience = () => {
+    setExperience((prevData) =>
+      prevData.map((entry) =>
+        entry.id === experienceData.id
+          ? { ...entry, ...experienceData, experienceIsActive: false }
+          : entry
+      )
+    );
+    setExperienceIsEdit();
   };
 
   const testFn = () => {
-    console.log(education);
+    console.log(experience);
+    console.log(experienceIsEdit);
+    console.log(experienceData);
   };
   ////////////////////////// JSX /////////////////////////////
   return (
@@ -121,12 +144,15 @@ function App() {
         experienceData={experienceData}
         changeExperience={handleChangeExperience}
         addExperience={handleAddExperience}
+        experienceIsEdit={experienceIsEdit}
+        updateExperience={handleUpdateExperience}
       />
       <Resume
         generalData={generalData}
         education={education}
         editEducation={handleEditEducation}
         experience={experience}
+        editExperience={handleEditExperience}
       />
       <button onClick={testFn}>test button</button>
     </div>

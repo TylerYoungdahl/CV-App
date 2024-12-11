@@ -1,14 +1,9 @@
 import Button from "./Button";
+import { defaultEducationData } from "../../defaultValues";
 import "./EducationForm.css";
 
 export default function EducationForm({
-  educationData = {
-    id,
-    school,
-    schoolDegree,
-    schoolStart,
-    schoolEnd,
-  },
+  educationData = { defaultEducationData },
   changeEducation,
   addEducation,
   educationIsEdit,

@@ -1,6 +1,17 @@
-export default function Experience({ id, job, company, jobStart, jobEnd }) {
+export default function Experience({
+  id,
+  job,
+  company,
+  jobStart,
+  jobEnd,
+  editExperience,
+  experienceIsActive,
+}) {
   return (
-    <div className="experience" data-id={id}>
+    <div
+      className={experienceIsActive ? "experience active" : "experience"}
+      onClick={() => editExperience(id)}
+    >
       <h2 className="position">{job}</h2>
       <p className="company">{company}</p>
       <p className="years-active">
