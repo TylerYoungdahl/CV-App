@@ -3,7 +3,16 @@
   flex-direction: column;
   width: 50%;
   aspect-ratio: 8.5/11;
+  padding: 0 1em 0 1em;
   background-color: white;
+}
+
+.general-container {
+  text-align: center;
+}
+
+.entries-header {
+  text-decoration: underline;
 }
 
 .education,

@@ -140,12 +140,6 @@ function App() {
     setExperienceData({ ...defaultExperienceData, id: crypto.randomUUID() });
     setExperienceIsEdit(false);
   };
-
-  const testFn = () => {
-    console.log(education);
-    console.log(educationIsEdit);
-    console.log(educationData);
-  };
   ////////////////////////// JSX /////////////////////////////
   return (
     <div className="main">
@@ -172,7 +166,6 @@ function App() {
         experience={experience}
         editExperience={handleEditExperience}
       />
-      <button onClick={testFn}>test button</button>
     </div>
   );
 }
